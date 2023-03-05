@@ -67,6 +67,11 @@ const loginUser = asyncHandler(async (req, res) => {
         user: {
           name: user.name,
           email: user.email,
+          phone:user.phone,
+          imageUrl:user.imageUrl,
+          password:user.password,
+          
+
           id: user.id,
         },
       },
@@ -83,7 +88,7 @@ const loginUser = asyncHandler(async (req, res) => {
 //current user======================================================================
 const currentUser = asyncHandler(async (req, res) => {
   res.json(req.user);
-  console.log(req.user.id);
+  console.log(req.user);
 });
 
 module.exports = { registerUser, loginUser, currentUser };
