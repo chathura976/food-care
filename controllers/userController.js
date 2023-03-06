@@ -65,9 +65,13 @@ const loginUser = asyncHandler(async (req, res) => {
     const accessToken = jwt.sign(
       {
         user: {
+          id:user.id,
           name: user.name,
           email: user.email,
-          id: user.id,
+          phone:user.phone,
+          imageUrl:user.imageUrl,
+          password:user.password,
+          
         },
       },
       process.env.JWT_SECRET,

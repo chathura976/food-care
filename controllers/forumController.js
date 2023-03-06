@@ -57,7 +57,7 @@ const createForum = asyncHandler(async (req, res, next) => {
     forum.imageUrl = req.file.path;
   }
 
-  console.log(forum.imageUrl);
+ 
   forum
     .save()
     .then((response) => {
