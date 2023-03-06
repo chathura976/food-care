@@ -72,6 +72,11 @@ const loginUser = asyncHandler(async (req, res) => {
           imageUrl:user.imageUrl,
           password:user.password,
           
+<<<<<<< HEAD
+=======
+
+          id: user.id,
+>>>>>>> 07dfee0f34e2542b01df057d78ac279a5ed13380
         },
       },
       process.env.JWT_SECRET,
@@ -87,7 +92,7 @@ const loginUser = asyncHandler(async (req, res) => {
 //current user======================================================================
 const currentUser = asyncHandler(async (req, res) => {
   res.json(req.user);
-  console.log(req.user.id);
+  console.log(req.user);
 });
 
 module.exports = { registerUser, loginUser, currentUser };
