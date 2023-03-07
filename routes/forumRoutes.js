@@ -15,22 +15,19 @@ const {
   likeForum,
 } = require("../controllers/forumController");
 const router = express.Router();
-// const upload = require("../middleware/uploadForumImage");
+const upload = require("../middleware/uploadForumImage");
 const validateToken = require("../middleware/validateTokenHandler");
 
 router.use(validateToken);
-router.route("/").get(getForums).post(createForum);
+router.route("/").get(getForums).post(upload.single("imageUrl"),createForum);
 router.route("/ownforums").get(getOwnForums);
 router
   .route("/ownforums/:id")
   .get(getOwnForum)
-  .put(updateForum)
+  .put(upload.single("imageUrl"),updateForum)
   .delete(deleteForum);
 router.route("/:id").get(getForum);
 router.route("/:id/like").put(likeForum);
-
-
-
 
 
 router.route("/:id/comment").post(addComment).get(getAllCommentsInForum);

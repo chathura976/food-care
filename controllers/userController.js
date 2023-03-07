@@ -72,11 +72,6 @@ const loginUser = asyncHandler(async (req, res) => {
           imageUrl:user.imageUrl,
           password:user.password,
           
-<<<<<<< HEAD
-=======
-
-          id: user.id,
->>>>>>> 07dfee0f34e2542b01df057d78ac279a5ed13380
         },
       },
       process.env.JWT_SECRET,
@@ -92,7 +87,17 @@ const loginUser = asyncHandler(async (req, res) => {
 //current user======================================================================
 const currentUser = asyncHandler(async (req, res) => {
   res.json(req.user);
-  console.log(req.user);
+  console.log(req.user.id);
 });
 
-module.exports = { registerUser, loginUser, currentUser };
+//get a user==========================================================================
+const getUser = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.params.id);
+  if (!user) {
+    res.status(404);
+    throw new Error("Forum not found");
+  }
+  res.status(200).json(user);
+});
+
+module.exports = { registerUser, loginUser, currentUser, getUser };

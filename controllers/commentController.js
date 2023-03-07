@@ -26,7 +26,6 @@ const getAllCommentsInForum = asyncHandler(async (req, res) => {
 // Add a new comment to a forum post==================================================================
 const addComment = asyncHandler(async (req, res) => {
   const forumId = req.params.id;
-  const { text } = req.body;
 
   console.log(forumId);
 
@@ -39,8 +38,9 @@ const addComment = asyncHandler(async (req, res) => {
 
     // Create a new comment and save it to the database
     const newComment = new Comment({
-      text: text,
-      commentor: req.user.id, // assumes the authenticated user is making the comment
+      text: req.body.text,
+      commenter: req.body.commenter,
+      commenterId: req.user.id, // assumes the authenticated user is making the comment
     });
 
     await newComment.save();
@@ -49,12 +49,13 @@ const addComment = asyncHandler(async (req, res) => {
     forumPost.comments.push(newComment);
     await forumPost.save();
 
-    res.send({ message: "Comment added successfully", comment: newComment });
+    res.status(201).send({ message: "Comment added successfully", comment: newComment });
   } catch (error) {
     console.error(error);
-    res.status(500).send({ message: "Internal server error" });
+    res.status(500).send({ message: error });
   }
 });
+
 
 //update comment============================================================================================
 const updateComment = asyncHandler(async (req, res) => {

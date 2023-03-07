@@ -53,14 +53,11 @@ const createForum = asyncHandler(async (req, res, next) => {
     description: req.body.description,
     author: req.body.author,
   });
-<<<<<<< HEAD
   if (req.file) {
     forum.imageUrl = req.file.path;
   }
 
  
-=======
->>>>>>> 07dfee0f34e2542b01df057d78ac279a5ed13380
   forum
     .save()
     .then((response) => {
