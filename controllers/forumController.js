@@ -92,6 +92,7 @@ const updateForum = asyncHandler(async (req, res) => {
   forum.description = req.body.description || forum.description;
   forum.author = req.body.author || forum.author;
 
+  forum.updatedAt = Date.now();
   const updatedForum = await forum.save();
 
   res.status(200).json({

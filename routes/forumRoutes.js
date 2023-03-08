@@ -20,7 +20,9 @@ const validateToken = require("../middleware/validateTokenHandler");
 
 router.use(validateToken);
 router.route("/").get(getForums).post(upload.single("imageUrl"),createForum);
+
 router.route("/ownforums").get(getOwnForums);
+
 router
   .route("/ownforums/:id")
   .get(getOwnForum)
