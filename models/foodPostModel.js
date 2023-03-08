@@ -21,7 +21,7 @@ const foodSchema = new mongoose.Schema(
         type: String,
       },
     },
-    imageUrl: { type: String },
+    imageUrls: { type: Array },
   },
   {
     timestamps: true,

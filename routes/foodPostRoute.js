@@ -6,9 +6,9 @@ const upload = require("../middleware/uploadFoodImage");
 
 router.use(validateToken);
 
-router.route("/").get(getFoodPosts).post(upload.single("imageUrl"),createFoodPost);
+router.route("/").get(getFoodPosts).post(upload.array("imageUrls",5),createFoodPost);
 
-router.route("/ownfood/:id").get(getOwnFood).put(upload.single("imageUrl"),updateFoodPost).delete(deleteFoodPost);
+router.route("/ownfood/:id").get(getOwnFood).put(upload.array("imageUrls",5),updateFoodPost).delete(deleteFoodPost);
 
 router.route("/ownfood").get(getOwnFoods);
 

@@ -28,11 +28,11 @@ const createFoodPost = async (req, res, next) => {
       lon: req.body.location.lon,
     },
   });
-  if (req.file) {
-    food.imageUrl = req.file.path;
+  if (req.files) { // <-- use req.files instead of req.file
+    food.imageUrls = req.files.map(file => file.path); // <-- store an array of all file paths
   }
 
-  console.log(food.imageUrl);
+  console.log(food.imageUrls);
   try {
     const savedFood = await food.save();
     res.json({
@@ -82,7 +82,7 @@ const updateFoodPost = asyncHandler(async (req, res) => {
   }
 
   if (req.file) {
-    food.imageUrl = req.file.path;
+    food.imageUrls = req.file.path;
   }
 
   food.title = req.body.title || food.title;
@@ -117,9 +117,9 @@ const deleteFoodPost = asyncHandler(async (req, res) => {
     throw new Error("Forum not found");
   }
 
-  if (food.imageUrl) {
+  if (food.imageUrls) {
     // Remove the image file from the file system
-    fs.unlink(food.imageUrl, (err) => {
+    fs.unlink(food.imageUrls, (err) => {
       if (err) {
         console.error(err);
       }
