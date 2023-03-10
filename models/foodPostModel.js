@@ -7,7 +7,9 @@ const foodSchema = new mongoose.Schema(
       required: true,
       ref: "User",
     },
+    
     title: { type: String, required: true },
+    author: { type: String },
     description: { type: String, required: true },
     quantity: { type: String },
     other: { type: String },

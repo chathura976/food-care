@@ -18,6 +18,7 @@ const createFoodPost = async (req, res, next) => {
   const food = new Food({
     user_id: req.user.id,
     title: req.body.title,
+    author:req.body.author,
     description: req.body.description,
     quantity: req.body.quantity,
     other: req.body.other,
@@ -85,6 +86,7 @@ const updateFoodPost = asyncHandler(async (req, res) => {
     food.imageUrls = req.file.path;
   }
 
+  
   food.title = req.body.title || food.title;
   food.description = req.body.description || food.description;
   food.quantity = req.body.quantity || food.quantity;
