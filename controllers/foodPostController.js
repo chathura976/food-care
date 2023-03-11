@@ -119,12 +119,14 @@ const deleteFoodPost = asyncHandler(async (req, res) => {
     throw new Error("Forum not found");
   }
 
-  if (food.imageUrls) {
-    // Remove the image file from the file system
-    fs.unlink(food.imageUrls, (err) => {
-      if (err) {
-        console.error(err);
-      }
+  if (food.imageUrls && food.imageUrls.length > 0) {
+    // Remove the image files from the file system
+    food.imageUrls.forEach((url) => {
+      fs.unlink(url, (err) => {
+        if (err) {
+          console.error(err);
+        }
+      });
     });
   }
 
@@ -135,5 +137,6 @@ const deleteFoodPost = asyncHandler(async (req, res) => {
     food: food,
   });
 });
+
 
 module.exports = { getFoodPosts, createFoodPost, updateFoodPost,deleteFoodPost,getOwnFoods,getOwnFood };

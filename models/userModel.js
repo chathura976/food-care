@@ -12,6 +12,9 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: [true, "Please enter the mobile number."],
     },
+    address:{
+       type: String 
+    },
     imageUrl: { type: String },
     password: { type: String, required: [true, "Please enter the password."] },
    

@@ -18,6 +18,7 @@ app.use("/api/food", require("./routes/foodPostRoute"));
 app.use("/api/chat", require("./routes/chatRoute"));
 app.use('/uploads',express.static('uploads'));
 app.use('/foodimages',express.static('foodimages'));
+app.use('/profiles',express.static('profiles'));
 app.use(errorHandler);
 
 server.listen(port, () => {

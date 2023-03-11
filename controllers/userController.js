@@ -30,6 +30,7 @@ const registerUser = asyncHandler(async (req, res, next) => {
     name: req.body.name,
     email: req.body.email,
     phone: req.body.phone,
+    address: req.body.address,
     password: hashedPassword,
   });
   if (req.file) {
@@ -71,6 +72,7 @@ const loginUser = asyncHandler(async (req, res) => {
           phone:user.phone,
           imageUrl:user.imageUrl,
           password:user.password,
+          address:user.address
           
         },
       },
@@ -100,4 +102,11 @@ const getUser = asyncHandler(async (req, res) => {
   res.status(200).json(user);
 });
 
-module.exports = { registerUser, loginUser, currentUser, getUser };
+//get all users======================================================================
+const getUsers = asyncHandler(async (req, res) => {
+  const users = await User.find();
+  res.status(200).json(users);
+});
+
+
+module.exports = { registerUser, loginUser, currentUser, getUser,getUsers };
